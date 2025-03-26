@@ -1,0 +1,72 @@
+{
+    "east": {
+        "bc": "alberta",
+        "alberta": "saskatchewan",
+        "saskatchewan": "manitoba",
+        "manitoba": "ontario",
+        "ontario": "quebec",
+        "quebec": "newfoundland",
+        "new brunswick": "nova scotia",
+        "nova scotia": "water",
+        "newfoundland": "water",
+        "yukon": "nwt",
+        "nwt": "nunavut",
+        "nunavut": "water"
+    },
+    "west": {
+        "bc": "water",
+        "alberta": "bc",
+        "saskatchewan": "alberta",
+        "manitoba": "saskatchewan",
+        "ontario": "manitoba",
+        "quebec": "ontario",
+        "new brunswick": "quebec",
+        "newfoundland": "quebec",
+        "nova scotia": "new brunswick",
+        "nwt": "yukon",
+        "nunavut": "nwt",
+        "yukon": "usa"
+    },
+    "north": {
+        "bc": "yukon",
+        "alberta": "nwt",
+        "saskatchewan": "nwt",
+        "manitoba": "nunavut",
+        "new brunswick": "quebec",
+        "quebec": "water",
+        "ontario": "water",
+        "newfoundland": "water",
+        "nova scotia": "new brunswick",
+        "yukon": "water",
+        "nwt": "water",
+        "nunavut": "water"
+    },
+    "south": {
+        "bc": "usa",
+        "alberta": "usa",
+        "saskatchewan": "usa",
+        "manitoba": "usa",
+        "ontario": "usa",
+        "quebec": "new brunswick",
+        "new brunswick": "nova scotia",
+        "newfoundland": "quebec",
+        "nova scotia": "water",
+        "yukon": "bc",
+        "nwt": "alberta",
+        "nunavut": "manitoba"
+    },
+    "visited": {
+        "bc": 0,
+        "alberta": 0,
+        "saskatchewan": 0,
+        "manitoba": 0,
+        "ontario": 0,
+        "quebec": 0,
+        "new brunswick": 0,
+        "newfoundland": 0,
+        "nova scotia": 0,
+        "yukon": 0,
+        "nwt": 0,
+        "nunavut": 0
+    }
+}
