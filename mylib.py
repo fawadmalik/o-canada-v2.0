@@ -1,7 +1,8 @@
 import pygame
 
 def reset(where, visited, image_and_caption):
-     where = "bc"
+     # where = "bc"
+     where = "Crypt of Echoes"
      prov(where, visited, image_and_caption)
      for p in visited:
           visited[p] = 0
