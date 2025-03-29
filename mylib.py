@@ -5,6 +5,7 @@ def reset(where, visited, image_and_caption):
      prov(where, visited, image_and_caption)
      for p in visited:
           visited[p] = 0
+     return where
 
 def visitedall(visited):
      for p in visited:
