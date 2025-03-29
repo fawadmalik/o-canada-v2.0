@@ -16,7 +16,7 @@ south = data["south"]
 visited = data["visited"]
 
 # game_end_location = ["water", "usa"]
-game_end_location = ["hell"]
+game_end_locations = ["hell"]
 
 image_and_caption = {"current_image": "", "current_caption": ""}
 
@@ -47,6 +47,7 @@ font = pygame.font.SysFont(None, 36)
 # Start in the first room (top left of the map)
 where = list(north.keys())[0]
 prov(where, visited, image_and_caption)
+print("Starting with image and caption of " + str(image_and_caption))
 
 # Create player character
 player = Character(role="PC", color=(255, 0, 0))
@@ -59,72 +60,96 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-    if where in game_end_location:
-        keys = pygame.key.get_pressed()
-        # press R to reset
-        if keys[pygame.K_r]:
-            where = reset(where, visited, image_and_caption)
-            player.move_to_center()
-            # print(where + "::" + str(image_and_caption))
 
-        if keys[pygame.K_q]:
-            running = False
-    else:
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_RIGHT] and not is_right:
-            where = east[where]
+        elif event.type == pygame.KEYDOWN:
+            if where in game_end_locations:
+                if event.key == pygame.K_r:
+                    where = reset(where, visited, image_and_caption)
+                    player.move_to_center()
+                elif event.key == pygame.K_q:
+                    running = False
+
+            else:
+                if event.key == pygame.K_RIGHT:
+                    player.direction.x = player.speed
+                elif event.key == pygame.K_LEFT:
+                    player.direction.x = -player.speed
+                elif event.key == pygame.K_UP:
+                    player.direction.y = -player.speed
+                elif event.key == pygame.K_DOWN:
+                    player.direction.y = player.speed
+                elif event.key == pygame.K_r:
+                    where = reset(where, visited, image_and_caption)
+                    player.move_to_center()
+                elif event.key == pygame.K_q:
+                    running = False
+
+    all_sprites.update()
+
+    # -------------------
+    # Room Boundary Logic
+    # -------------------
+
+    # Room image bounds
+    left_bound = 200
+    right_bound = 600
+    top_bound = 100
+    bottom_bound = 340
+
+    if player.rect.left < left_bound:
+        next_room = west[where]
+        if next_room not in game_end_locations:
+            where = next_room
+            prov(where, visited, image_and_caption)
+            player.move_to_edge("right")
+
+        else:
+            where = next_room
             prov(where, visited, image_and_caption)
             player.move_to_center()
-            is_right = True
 
-        if not keys[pygame.K_RIGHT]:
-            is_right = False
-
-        if keys[pygame.K_LEFT] and not is_left:
-            where = west[where]
+    elif player.rect.right > right_bound:
+        next_room = east[where]
+        if next_room not in game_end_locations:
+            where = next_room
+            prov(where, visited, image_and_caption)
+            player.move_to_edge("left")
+        else:
+            where = next_room
             prov(where, visited, image_and_caption)
             player.move_to_center()
-            is_left = True
 
-        if not keys[pygame.K_LEFT]:
-            is_left = False
-
-        if keys[pygame.K_UP] and not is_up:
-            where = north[where]
+    elif player.rect.top < top_bound:
+        next_room = north[where]
+        if next_room not in game_end_locations:
+            where = next_room
+            prov(where, visited, image_and_caption)
+            player.move_to_edge("down")
+        else:
+            where = next_room
             prov(where, visited, image_and_caption)
             player.move_to_center()
-            is_up = True
 
-        if not keys[pygame.K_UP]:
-            is_up = False
-
-        if keys[pygame.K_DOWN] and not is_down:
-            where = south[where]
+    elif player.rect.bottom > bottom_bound:
+        next_room = south[where]
+        if next_room not in game_end_locations:
+            where = next_room
+            prov(where, visited, image_and_caption)
+            player.move_to_edge("up")
+        else:
+            where = next_room
             prov(where, visited, image_and_caption)
             player.move_to_center()
-            is_down = True
 
-        if not keys[pygame.K_DOWN]:
-            is_down = False
-
-        if keys[pygame.K_r]:
-            where = reset(where, visited, image_and_caption)
-
-        if keys[pygame.K_q]:
-            running = False
-
-    # Display the current image
-
-    screen.fill(white)  # Fill the screen with white
+    # -------------------
+    # Drawing
+    # -------------------
+    screen.fill(white)
     screen.blit(image_and_caption["current_image"], (200, 100))
-
-    # Render the caption text
     caption_text = font.render(image_and_caption["current_caption"], True, black)
     screen.blit(caption_text, (300, 400))
 
-    all_sprites.update()
     all_sprites.draw(screen)
-    # Update the display
     pygame.display.update()
 
 # Quit Pygame
