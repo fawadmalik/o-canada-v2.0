@@ -14,6 +14,7 @@ class Character(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=position)
         self.speed = 3 # pixels per frame
         self.direction = pygame.Vector2(0, 0)
+        self.health = 10
 
     def move_to_center(self):
         self.rect.center = (400, 220)
