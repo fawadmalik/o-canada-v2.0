@@ -5,7 +5,7 @@ import random
 from mylib import reset, visitedall, prov
 from character import Character
 from fireball import Fireball
-from my_challenges import fireball_challenge_logic
+from my_challenges import do_fireball_challenge
 
 
 
@@ -167,7 +167,7 @@ while running:
         # Fireball Challenge (Tomb of the Forgotten)
         # -------------------
         if where == "Tomb of the Forgotten":
-            fireball_challenge_things = fireball_challenge_logic(
+            fireball_challenge_things = do_fireball_challenge(
                 where, player, fireballs, fireball_timer, dodged_fireballs,
                 dodge_target, dodge_goal_achieved, prov, visited, image_and_caption
             )

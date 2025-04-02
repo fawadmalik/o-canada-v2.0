@@ -5,7 +5,7 @@ from fireball import Fireball
 # -------------------
 # Fireball Challenge
 # -------------------
-def fireball_challenge_logic(where, player, fireballs, fireball_timer, dodged_fireballs,
+def do_fireball_challenge(where, player, fireballs, fireball_timer, dodged_fireballs,
                               dodge_target, dodge_goal_achieved, prov, visited, image_and_caption):
     if where != "Tomb of the Forgotten":
         return fireball_timer, dodged_fireballs, dodge_goal_achieved, False
